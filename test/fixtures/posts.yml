@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  bad_sites_id: 1
+  added_ts: nil
+  domain: MyString
+  subreddit: MyString
+  post_url: MyString
+  op_url: MyString
+  thumbnail: MyString
+  title: MyString
+
+two:
+  bad_sites_id: 1
+  added_ts: nil
+  domain: MyString
+  subreddit: MyString
+  post_url: MyString
+  op_url: MyString
+  thumbnail: MyString
+  title: MyString
+
+
