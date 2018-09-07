@@ -1,0 +1,131 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-12 col-md-offset-1 col-md-2">
+      <h1 style="text-align: left;margin-bottom: 1em"> Bot Settings </h1>
+    </div>
+    <div class="col-sm-12 col-md-12">
+      <%= form_with url: page_update_settings_url do |form| %>
+        <div class="row">
+          <div class="col-sm-12 col-md-offset-1 col-md-4">
+            <div class="panel panel-default  same-height">
+              <div class="panel-heading">Settings</div>
+              <div class="panel-body">
+                <div class="form-group">
+                  <table style="width: 100%;border-collapse:separate; border-spacing:1.5em;">
+                    <tr>
+                      <td>
+                        <label for="is_running"><i class="fas fa-power-off"></i>&nbsp;&nbsp;&nbsp;Running </label>
+                      </td>
+                      <td>
+                        <input type="checkbox" id="is_running" name="is_running" <%= @settings.is_running ? "checked" : "" %> data-toggle="toggle">
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td>
+                        <label for="dry_run"><i class="fas fa-project-diagram"></i>&nbsp;&nbsp;&nbsp;Testing Mode
+                        </label>
+                      </td>
+                      <td>
+                        <input type="checkbox" id="dry_run" name="dry_run" <%= @settings.dry_run ? "checked" : "" %> data-toggle="toggle">
+                      </td>
+                    </tr>
+
+
+                    <tr>
+                      <td>
+                        <label for="archive_command"><i class="fas fa-archive"></i>&nbsp;&nbsp;&nbsp;Archive Command
+                        </label>
+                      </td>
+                      <td>
+                        <select id="archive_command" name="archive_command" class="form-control input-md">
+                          <option value="is" <%= @archive_command.start_with? ? 'savepagenow' : 'selected' %> >Archive.is</option>
+                          <option value="org" <%= @archive_command.start_with? ? 'archiveis' : 'selected' %> >Archive.org</option>
+                        </select>
+                      </td>
+                    </tr>
+
+                  </table>
+                </div> <!-- /.form-group -->
+              </div> <!-- /.panel-body -->
+            </div> <!-- /.panel -->
+
+            <div class="panel panel-default same-height">
+              <div class="panel-heading"><label for="template">Template</label></div>
+              <div class="panel-body">
+                <div class="form-group">
+                  <textarea class="form-control " id="template" name="template" rows="10"><%= @settings.template %></textarea>
+                </div>
+              </div> <!-- /.panel-body -->
+            </div> <!-- /.panel -->
+
+          </div>   <!-- /.col-sm-12 col-md-6 -->
+
+          <div class="col-sm-12 col-md-offset-1 col-md-4">
+
+            <div class="panel panel-default  same-height">
+              <div class="panel-heading"><label for="subreddits">Subreddits</label></div>
+              <div class="panel-body">
+                <div class="form-group">
+                  <textarea class="form-control " id="subreddits" name="subreddits" rows="10"><%= @subreddit_names.join("\n") %></textarea>
+                </div>
+              </div> <!-- /.panel-body -->
+            </div> <!-- /.panel -->
+
+            <div class="panel panel-default  same-height">
+              <div class="panel-heading"><label for="domains"> Domain List </label></div>
+              <div class="panel-body">
+                <div class="form-group">
+                  <textarea class="form-control " id="domains" name="domains" rows="10"><%= @bads.join("\n") %></textarea>
+                </div>
+              </div> <!-- /.panel-body -->
+            </div> <!-- /.panel -->
+
+
+          </div>   <!-- /.col-sm-12 col-md-6 -->
+
+        </div> <!-- /.row -->
+
+
+        <div class="col-sm-6 col-sm-offset-3 col-md-offset-1 col-md-4">
+          <input type="submit" class="form-control btn btn-primary btn-block " name="commit" value="Save " data-disable-with="Save ">
+        </div>
+
+
+      <% end %> <!-- /form -->
+
+    </div> <!-- /.col-sm-12 col-md-12 -->
+  </div> <!-- /.row -->
+  <div class="row">
+    <div class="col-sm-offset-1 col-sm-10 col-md-offset-1 col-md-10">
+      <div class="panel panel-default " style="margin-top: 2em">
+        <div class="panel-heading"><h2>Last 50 Posts</h2></div>
+        <div class="panel-body">
+          <table class="table-striped" style="width: 100%;border-collapse:separate; border-spacing:1.5em;">
+            <tr>
+              <th>Domain</th>
+              <th>Subreddit</th>
+              <th>Title</th>
+              <th>Post</th>
+              <th>When</th>
+              <th>Archive</th>
+            </tr>
+            <% @history.each do |hist| %>
+              <tr>
+                <td><%= hist.domain %></td>
+                <td><%= hist.subreddit %></td>
+                <td><%= hist.title %></td>
+                <td><a href="<%= hist.post_url %>">Reddit Post</a></td>
+                <td><span class="a-timestamp-full-date-time" data-ts="<%= hist.added_ts %>"></span></td>
+                <td><a href="<%= hist.archive_url %>">Archive</a></td>
+              </tr>
+
+            <% end %>
+          </table>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+</div> <!-- /.container-fluid -->

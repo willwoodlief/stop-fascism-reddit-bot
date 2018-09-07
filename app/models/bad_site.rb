@@ -35,4 +35,26 @@ class BadSite < ApplicationRecord
     raise "Could not find id of domain after processing for it"
 
   end
+
+  def self.update_list(domain_array)
+
+    #set all domains to is_active = false
+    # for each domain array, if not in list then add, else set is_active to true
+    BadSite.active.update_all(is_active: false)
+
+    domain_array.each do |dommi|
+      next if dommi.to_s.strip.blank?
+      domain = self.get_host_without_www(dommi)
+      b =  BadSite.find_by_url(domain)
+      if b.blank?
+        b = BadSite.new
+        b.url = domain
+        b.is_active= true
+        b.save!
+      else
+        b.is_active= true
+        b.save!
+      end
+    end
+  end
 end
