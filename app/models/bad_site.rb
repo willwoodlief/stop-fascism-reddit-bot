@@ -24,6 +24,7 @@ class BadSite < ApplicationRecord
   end
 
   def self.get_id(site)
+    return if site.blank?
     domain = self.get_host_without_www(site)
     bads = BadSite.active.all
     bads.each do |bad|

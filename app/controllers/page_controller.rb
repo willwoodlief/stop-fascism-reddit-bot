@@ -31,6 +31,11 @@ class PageController < ApplicationController
     BadSite.update_list(blacklist)
     Subreddit.update_list(subreddits)
 
+    @subreddit_names =  Subreddit.pluck(:subreddit_name)
+    @archive_command = Setting.only_row.archiver_program
+    @bads = BadSite.active.pluck(:url)
+    @history = Post.order('created_at desc').limit(50).all
+    @settings = Setting.only_row
 
     render :show_settings
   end
