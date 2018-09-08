@@ -13,13 +13,13 @@ default: &default
   adapter: mysql2
   encoding: utf8
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: reddit_bot
-  password: 123456
   socket: /var/run/mysqld/mysqld.sock
 
 development:
   <<: *default
   database: reddit_bot
+  username: reddit_bot
+  password: 123456
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -49,6 +49,6 @@ test:
 #
 production:
   <<: *default
-  database: reddit_bot_production
-  username: reddit_bot
-  password: <%= ENV['REDDIT_BOT_DATABASE_PASSWORD'] %>
+  database: <%= ENV['REDDIT_BOT_DATABASE_DBNAME'] || Rails.application.credentials.dig(:database, :production,:database) %>
+  username: <%= ENV['REDDIT_BOT_DATABASE_USERNAME'] || Rails.application.credentials.dig(:database, :production,:username) %>
+  password: <%= ENV['REDDIT_BOT_DATABASE_PASSWORD'] || Rails.application.credentials.dig(:database, :production,:password)%>
