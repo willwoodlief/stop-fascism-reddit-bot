@@ -11,9 +11,9 @@ class PageController < ApplicationController
     b_is_running = params[:is_running].blank? ? false : true
     b_dry_run = params[:dry_run].blank? ? false : true
     if params[:archive_command] === 'is'
-      archive = 'savepagenow'
+      archive = '/usr/local/bin/archiveis'
     elsif params[:archive_command] === 'org'
-      archive = 'savepagenow --accept-cache'
+      archive = '/usr/local/bin/savepagenow --accept-cache'
     else
       archive = nil
     end
