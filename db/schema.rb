@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_07_182946) do
+ActiveRecord::Schema.define(version: 2018_09_09_110928) do
 
   create_table "bad_sites", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "url", null: false
@@ -38,7 +38,7 @@ ActiveRecord::Schema.define(version: 2018_09_07_182946) do
     t.index ["domain"], name: "index_posts_on_domain", length: 100
     t.index ["op_url"], name: "index_posts_on_op_url", unique: true, length: 150
     t.index ["post_url"], name: "index_posts_on_post_url", length: 150
-    t.index ["subreddit"], name: "index_posts_on_subreddit", unique: true, length: 50
+    t.index ["subreddit"], name: "index_posts_on_subreddit", length: 50
   end
 
   create_table "settings", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
