@@ -39,8 +39,9 @@
                       </td>
                       <td>
                         <select id="archive_command" name="archive_command" class="form-control input-md">
-                          <option value="is" <%= @archive_command.start_with? ? 'savepagenow' : 'selected' %> >Archive.is</option>
-                          <option value="org" <%= @archive_command.start_with? ? 'archiveis' : 'selected' %> >Archive.org</option>
+                          <option value="is" <%= ( @archive_command.include? 'savepagenow' )?   'selected' : '' %> >Archive.is</option>
+                          <option value="org" <%= ( @archive_command.include? 'archiveis' ) ?   'selected' : ''%> >Archive.org</option>
+                          <option value="imgur" <%= ( @archive_command.include?  'imgur' ) ?  'selected': '' %> >Imgur</option>
                         </select>
                       </td>
                     </tr>

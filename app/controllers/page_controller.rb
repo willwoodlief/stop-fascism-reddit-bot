@@ -5,6 +5,8 @@ class PageController < ApplicationController
     @bads = BadSite.active.pluck(:url)
     @history = Post.order('created_at desc').limit(50).all
     @settings = Setting.only_row
+
+
   end
 
   def update_settings
@@ -14,6 +16,8 @@ class PageController < ApplicationController
       archive = '/usr/bin/python  /usr/local/bin/archiveis'
     elsif params[:archive_command] === 'org'
       archive = '/usr/bin/python  /usr/local/bin/savepagenow --accept-cache'
+    elsif params[:archive_command] === 'imgur'
+      archive = 'imgur'
     else
       archive = nil
     end
